@@ -54,7 +54,15 @@ The store wants to keep customer addresses. Propose two architectures for the CU
 **HINT:** search type 1 vs type 2 slowly changing dimensions. 
 
 ```
-Your answer...
+Architecture 1: Overwriting (Type 1)
+Keeping the address columns directly in the CUSTOMER table. When a customer moves, to simply run an UPDATE command to replace the old address with the new one.
+This is the simplest to maintain. However, comes with the cost of losing all history. 
+
+Architecture 2: Keeping the History (Type 2)
+Creating a separate CUSTOMER_ADDRESS table. In addition to the address data, you adding additional date columns to flag current status.
+When a customer moves: we can find find the old row and the new flagging variable will change to not current. and a new row with the new address with the flagging variable value as current.
+This architecture requires more storage and complex queries. However, it preserves all the address history. 
+
 ```
 
 ***
